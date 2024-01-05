@@ -13,7 +13,7 @@
             }
 
             InsertionSort(numbersArray);
-
+            BubbleSort(numbersArray);
 
         }
 
@@ -32,6 +32,27 @@
             }
             Console.WriteLine();
             Console.WriteLine("Insertion sort: ");
+            foreach (var num in numbers)
+            {
+                Console.Write(num + " ");
+            }
+            return numbers;
+        }
+
+        static int[] BubbleSort(int[] numbers)
+        {
+            for (int i = numbers.Length - 1; i >= 0; i--)
+            {
+                for (int j = numbers.Length - 1 - 1; j >= 0; j--)
+                {
+                    if (numbers[j] <= numbers[j + 1]) continue;
+                    int temp = numbers[j + 1];
+                    numbers[j + 1] = numbers[j];
+                    numbers[j] = temp;
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("Bubble sort: ");
             foreach (var num in numbers)
             {
                 Console.Write(num + " ");
