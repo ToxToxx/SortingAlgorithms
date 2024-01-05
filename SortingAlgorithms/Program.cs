@@ -12,9 +12,10 @@
                 Console.Write(num + " ");
             }
 
-            InsertionSort(numbersArray);
-            BubbleSort(numbersArray);
-            SelectionSort(numbersArray);
+            //InsertionSort(numbersArray);
+            //BubbleSort(numbersArray);
+            //SelectionSort(numbersArray);           
+            //WriteQuickSort(numbersArray);
 
         }
 
@@ -84,6 +85,59 @@
                 Console.Write(num + " ");
             }
             return numbers;
+        }
+        static void SwapQuickSort(ref int firstElement, ref int secondElement)
+        {
+            var temp = firstElement;
+            firstElement = secondElement;
+            secondElement = temp;
+        }
+
+        static int PartitionQuickSort(int[] array, int minIndex, int maxIndex)
+        {
+            var pivot = minIndex - 1;
+            for (var i = minIndex; i < maxIndex; i++)
+            {
+                if (array[i] < array[maxIndex])
+                {
+                    pivot++;
+                    SwapQuickSort(ref array[pivot], ref array[i]);
+                }
+            }
+
+            pivot++;
+            SwapQuickSort(ref array[pivot], ref array[maxIndex]);
+            return pivot;
+        }
+
+        static int[] QuickSort(int[] array, int minIndex, int maxIndex)
+        {
+            if (minIndex >= maxIndex)
+            {
+                return array;
+            }
+
+            var pivotIndex = PartitionQuickSort(array, minIndex, maxIndex);
+            QuickSort(array, minIndex, pivotIndex - 1);
+            QuickSort(array, pivotIndex + 1, maxIndex);
+
+            return array;
+        }
+
+        static int[] QuickSort(int[] array)
+        {
+            return QuickSort(array, 0, array.Length - 1);
+        }
+
+        static void WriteQuickSort(int[] array)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Quick Sort: ");
+            int[] quickSortOutput = QuickSort(array);
+            foreach (var num in quickSortOutput)
+            {
+                Console.Write(num + " ");
+            }
         }
     }
 }
