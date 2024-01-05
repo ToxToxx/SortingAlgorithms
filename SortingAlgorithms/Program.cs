@@ -17,8 +17,8 @@
             //SelectionSort(numbersArray);           
             //WriteQuickSort(numbersArray);
             //WriteBottomUpMergeSort(numbersArray);
-            WriteUpDownMergeSort(numbersArray);
-
+            //WriteUpDownMergeSort(numbersArray);
+            //CountingSort(numbersArray);
         }
 
         static int[] InsertionSort(int[] numbers)
@@ -271,5 +271,47 @@
             }
         }
 
+        static int[] CountingSort(int[] numbers)
+        {
+            var min = numbers[0];
+            var max = numbers[0];
+            foreach (int element in numbers)
+            {
+                if (element > max)
+                {
+                    max = element;
+                }
+                else if (element < min)
+                {
+                    min = element;
+                }
+            }
+
+            var correctionFactor = min != 0 ? -min : 0;
+            max += correctionFactor;
+
+            var count = new int[max + 1];
+            for (var i = 0; i < numbers.Length; i++)
+            {
+                count[numbers[i] + correctionFactor]++;
+            }
+
+            var index = 0;
+            for (var i = 0; i < count.Length; i++)
+            {
+                for (var j = 0; j < count[i]; j++)
+                {
+                    numbers[index] = i - correctionFactor;
+                    index++;
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("Counting sort: ");
+            foreach (var num in numbers)
+            {
+                Console.Write(num + " ");
+            }
+            return numbers;
+        }
     }
 }
