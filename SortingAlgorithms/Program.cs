@@ -14,6 +14,7 @@
 
             InsertionSort(numbersArray);
             BubbleSort(numbersArray);
+            SelectionSort(numbersArray);
 
         }
 
@@ -53,6 +54,31 @@
             }
             Console.WriteLine();
             Console.WriteLine("Bubble sort: ");
+            foreach (var num in numbers)
+            {
+                Console.Write(num + " ");
+            }
+            return numbers;
+        }
+
+        static int[] SelectionSort(int[] numbers)
+        {
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                int minNumber = i;
+                for (int j = i+1; j < numbers.Length; j++)
+                {
+                    if (numbers[j] < numbers[minNumber])
+                    {
+                        minNumber = j;
+                    }
+                }
+                int temp = numbers[minNumber];
+                numbers[minNumber] = numbers[i];
+                numbers[i] = temp;
+            }
+            Console.WriteLine();
+            Console.WriteLine("Selection sort: ");
             foreach (var num in numbers)
             {
                 Console.Write(num + " ");
